@@ -5,13 +5,6 @@ print(dictionarys)
 URI = dictionarys[input("Name of the dictionary you want to work with.")]
 eintraege = open(URI)
 
-#fgdfadfgfghfghhgfhgfhhsfhgfhfshgfhssghgfhsghsfghssghgadfgfghfghhgfhgfhhsfhgfhfshgfhssghgfhsghsfghssghg
-#ydfbgsdgsadfgfghfghhgfhgfhhsfhgfhfshgfhssghgfhsghsfghssghgadfgfghfghhgfhgfhhsfhgfhfshgfhssghgfhsghsfghssghg
-#adfgfghfghhgfhgfhhsfhgfhfshgfhssghgfhsghsfghssghgadfgfghfghhgfhgfhhsfhgfhfshgfhssghgfhsghsfghssghg
-#gfgasdgadfgfghfghhgfhgfhhsfhgfhfshgfhssghgfhsghsfghssghgadfgfghfghhgfhgfhhsfhgfhfshgfhssghgfhsghsfghssghg
-#sdfgsgsgfgadfgfghfghhgfhgfhhsfhgfhfshgfhssghgfhsghsfghssghgadfgfghfghhgfhgfhhsfhgfhfshgfhssghgfhsghsfghssghg
-#agadfgfghfghhgfhgfhhsfhgfhfshgfhssghgfhsghsfghssghgadfgfghfghhgfhgfhhsfhgfhfshgfhssghgfhsghsfghssghg
-
 class Entry:
     def __init__(self, deutsch, englisch):
         self.deutsch = deutsch
