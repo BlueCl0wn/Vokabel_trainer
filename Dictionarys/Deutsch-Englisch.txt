@@ -1,0 +1,12 @@
+*Deutsches Wort*:*Englisches Wort*
+Haus:house
+Garten:garden
+Katze:cat
+Hund:dog
+Tier:animal
+Vogel:bird
+gehen:walk
+laufen:run
+Pferd:horse
+Box:box
+Lautsprecher:speaker

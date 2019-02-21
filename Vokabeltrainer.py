@@ -8,7 +8,7 @@ class Dicts():
         self.sprache1 = sprache1
         self.sprache2 = sprache2
     def toDicts(self):
-        return str(self.id) + " - " + self.name
+        return str(self.id) + " | " + self.name
 
 
 class Entry:
@@ -18,35 +18,76 @@ class Entry:
     def toString(self):
         return self.deutsch + " - " + self.englisch
 
-dictionarys = [Dicts(1, "Deutsch-Englisch", "C:/Users/Darek/Python_Scripts/Vokabel_Programm/Dictionarys/Deutsch-Englisch.txt", "Deutsch", "Englisch"),
-               Dicts(2, "Deutsch-Latein", "C:/Users/Darek/Python_Scripts/Vokabel_Programm/Dictionarys/Deutsch-Latein.txt", "Deutsch", "Latein")]
-eintraege = []
+dictionarys = [Dicts(1, "Deutsch-Englisch", "Dictionarys/Deutsch-Englisch.txt", "Deutsch", "Englisch"),
+               Dicts(2, "Deutsch-Latein", "Dictionarys/Deutsch-Latein.txt", "Deutsch", "Latein")]
+Liste = []
+
 #-------------------------------------------------------------------------------
-def URI():
-    for i in range(len(dictionarys)):
-        if input == dictionarys[i].id:
-#           i = i
-            return dictionarys[i].URI
+# Funktionen für das Auswählen eines Dictionarys.
 def dictausgabe():
     for dictionary in dictionarys:
         print(dictionary.toDicts())
-def openURI(URI):
-    eintraege.append(open(URI)[3:])
+    print("-----------------------------------------------------------------------------")
+def URI():
+    for i in range(len(dictionarys)):
+        if Eingabe == dictionarys[i].id:
+            return dictionarys[i].URI
+def openURI(URI, mode):
+    f = open(URI)
+    file = f.read()
+    raw_list = file.split("\n")
+    raw_list.pop()
+    for string in raw_list:
+        Liste.append(string.split(":"))
+    del(f, file, raw_list)
 
 #-------------------------------------------------------------------------------
+# Funktionen für das Abfragen der Vokabeln und und bearbeiten der Dictionarys.
+#def while_letzte():
+#    while Vokabel1 or Vokabel2 == letzte or vorletzte:
+#        position = random.randint(1, len(Liste) - 1)
+#        Vokabel1 = Liste[position][0]
+#        Vokabel2 = Liste[position][1]
+
+def ausgabe():
+    print("-----------------------------------------------------------------------------")
+    for eintrag in range(len(Liste)):
+        print("".join(Liste[eintrag]))
+    print("-----------------------------------------------------------------------------")
+
 def eingabe():
     while True:
+        file = open(URI(), "a")
         deutsch = input("deutsches Wort: ")
         if deutsch == "#fertig":
             break
         englisch = input("englisches Wort: ")
         if englisch == "#fertig":
             break
-        eintraege.append(Entry(deutsch, englisch))
+        file.write(deutsch + ", " + englisch + "\n")
+        file.close()
+        del(deutsch, englisch)
+
+def entfernen():
+    while True:
+        f = open(URI(),"r")
+        lines = f.readlines()
+        print(lines)
+        f.close()
+        zuentfernen = input(" Tippe den kompletten Namen der zu entfernenden Vokabel ein. ")
+        if zuentfernen == "#fertig":
+            break
+        f = open(URI(), "w")
+        for line in lines:
+            if line != "zuentfernen"+ "\n":
+                f.write(line)
+        f.close()
+
+
 
 def abfrage():
     while True:
-        # Wie rum sollen die Vokabel abgefragt werden (Deutsch->Englisch, Englisch->Deutsch, Deutsch<->Englisch)
+        # Wie rum sollen die Vokabel abgefragt werden (Deutsch->Englisch, Englisch->Deutsch, Deutsch<->Englisch).
         abfrageart = input("Wie willst du abgefragt werden? Tippe für Deutsch -> Englisch = 1, für Englisch -> Deutsch = 2, für Deutsch <-> Englisch = 3. ")
         if abfrageart == "#fertig":
             print("-----------------------------------------------------------------------------")
@@ -59,96 +100,128 @@ def abfrage():
 
         # 1. Art des Abfragens der Vokabeln (Deutsch->Englisch).
         if abfrageint == 1:
+            letzte = ""
+            vorletzte = ""
             while True:
-                position = random.randint(1, len(eintraege) - 1)
+                # Vokabel wird ausgewählt
+                position = random.randint(1, len(Liste) - 1)
+                Vokabel1 = Liste[position][0]
+                Vokabel2 = Liste[position][1]
                 # Es wird überprüft ob die gewählte Vokabel bei den letzetn 2 mal Abfragen schon vorkam und wenn ja wird die Vokabel geändert.
-                if uebersetung == letzte:
-                    uebersetzung = eintraege[position + 1]
-                if uebersetzung == vorletzte:
-                    uebersetzung = eintraege[position + 2]
-                uebersetzung = input("Englische Übersetzung von " + eintraege[position].deutsch + ": ")
+                if Vokabel1 == letzte:
+                    Vokabel1 = Liste[position+1][0]
+                    Vokabel2 = Liste[position+1][1]
+                elif Vokabel1 == vorletzte:
+                    Vokabel1 = Liste[position+2][0]
+                    Vokabel2 = Liste[position+2][1]
+                uebersetzung = input("Englische Übersetzung von " + Vokabel1 + ": ")
                 if uebersetzung == "#fertig":
                     print("-----------------------------------------------------------------------------")
                     break
-                elif eintraege[position].englisch == uebersetzung:
+                elif Vokabel2 == uebersetzung:
                     print("Korrekt.")
                 else:
-                    print("Leider Falsch. Korrekt ist: "+ eintrage[position].englisch)
-
-                letzte = uebersetzung
+                    print("Leider Falsch. Korrekt ist: "+ Vokabel2)
+                letzte = Vokabel1
+                vorletzte = letzte
         # 2. Art des Abfragens der Vokabeln (Englisch->Deutsch).
         if abfrageint == 2:
+            letzte = ""
+            vorletzte = ""
             while True:
-                position = random.randint(1, len(eintraege) - 1)
-                # Es wird überprüft ob die gewählte Vokabel bei den letzetn 2 mal Abfragen schon vorkam und wenn ja wird die Vokabel geändert.
-                if uebersetung == letzte:
-                    uebersetzung = eintraege[position + 1]
-                if uebersetzung == vorletzte:
-                    uebersetzung = eintraege[position + 2]
-                uebersetzung = input("Englische Übersetzung von " + eintraege[position].englisch + ": ")
+                # Vokabel wird ausgewählt
+                position = random.randint(1, len(Liste) - 1)
+                Vokabel1 = Liste[position][0]
+                Vokabel2 = Liste[position][1]
+                # Es wird überprüft ob die gewählte Vokabel bei den letzten 2 mal Abfragen schon vorkam, wenn ja wird die Vokabel geändert.
+                if Vokabel1 == letzte:
+                    Vokabel1 = Liste[position+1][0]
+                    Vokabel2 = Liste[position+1][1]
+                elif Vokabel1 == vorletzte:
+                    Vokabel1 = Liste[position+2][0]
+                    Vokabel2 = Liste[position+2][1]
+                uebersetzung = input("Englische Übersetzung von " + Vokabel2 + ": ")
+                #
                 if uebersetzung == "#fertig":
                     print("-----------------------------------------------------------------------------")
                     break
-                elif eintraege[position].deutsch == uebersetzung:
+                elif DeutschVokabel == uebersetzung:
                     print("Korrekt")
                 else:
-                    print("Leider Falsch. Korrekt ist: "+ eintrage[position].deutsch)
-                letzte = uebersetzung
+                    print("Leider Falsch. Korrekt ist: "+ Vokabel1)
+                letzte = Vokabel1
                 vorletzte = letzte
-
         # 3. Art des Abfragens der Vokabeln (Deutsch<->Englisch).
         if abfrageint == 3:
+            letzte = ""
+            vorletzte = ""
             while True:
-                position = random.randint(1, len(eintraege) - 1)
+                # Vokabel wird ausgewählt
+                position = random.randint(1, len(Liste) - 1)
+                Vokabel1 = Liste[position][0]
+                Vokabel2 = Liste[position][1]
                 # Es wird überprüft ob die gewählte Vokabel bei den letzetn 2 mal Abfragen schon vorkam und wenn ja wird die Vokabel geändert.
-                if uebersetung == letzte:
-                    uebersetzung = eintraege[position + 1]
-                if uebersetzung == vorletzte
-                    uebersetzung = eintraege[position + 2]
+                if Vokabel1 or Vokabel2 == letzte:
+                    Vokabel1 = Liste[position+1][0]
+                    Vokabel2 = Liste[position+1][1]
+                elif Vokabel1 or Vokabel2 == vorletzte:
+                    Vokabel1 = Liste[position+2][0]
+                    Vokabel2 = Liste[position+2][1]
                 # Es wird zufällig eine Abfragerichtung ausgwählt.
                 richtung = random.randint(0,1)
                 if richtung == 0:
-                    uebersetzung = input("Englische Übersetzung von " + eintraege[position].deutsch + ": ")
+                    uebersetzung = input("Englische Übersetzung von " + Vokabel1 + ": ")
                     if uebersetzung == "#fertig":
                         print("-----------------------------------------------------------------------------")
                         break
-                    elif eintraege[position].englisch == uebersetzung:
+                    elif Vokabel2 == uebersetzung:
                         print("Korrekt")
                     else:
-                        print("Leider Falsch. Korrekt ist: "+ eintrage[position].englisch)
+                        print("Leider Falsch. Korrekt ist: "+ Vokabel2)
                 elif richtung == 1:
-                    uebersetzung = input("Englische Übersetzung von " + eintraege[position].englisch + ": ")
+                    uebersetzung = input("Englische Übersetzung von " + Vokabel2 + ": ")
                     if uebersetzung == "#fertig":
                         print("-----------------------------------------------------------------------------")
                         break
-                    elif eintraege[position].deutsch == uebersetzung:
+                    elif Vokabel1 == uebersetzung:
                         print("Korrekt")
                     else:
-                        print("Leider Falsch. Korrekt ist: "+ eintrage[position].deutsch)
-                letzte = uebersetzung
+                        print("Leider Falsch. Korrekt ist: "+ Vokabel1)
+                letzte = Vokabel1
                 vorletzte = letzte
 
-def ausgabe():
-    for eintrag in eintraege:
-        print(eintrag.toString())
 
+
+# Start anzeige des Programms.
 print("""Mögliche Befehle sind:
 #fertig um ein Menu zurückzugehen
 #menu um in Hauptmenu zu gelangen
 eingabe um Vokabeln zum dictionary hinzuzufügen,
 abfrage um abgefragt zu werden,
 ausgabe um alle gespeicherten Vokabeln auszugeben
-----------------------------------------------------------------------------""")
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------""")
 
 while True:
     dictausgabe()
-    input = int(input("welches dict? "))
-    eintraege.append(openURI(URI()))
+    Eingabe = int(input("welches dict? "))
+    openURI(URI(), "r")
     while True:
         befehl = input("Befehl: ")
-        if befehl == "eingabe":
-            eingabe()
-        if befehl == "abfrage":
+        if befehl == "bearbeiten":
+            while True:
+                befehl2 = input("eingabe oder entfernen? ")
+                if befehl2 == "eingabe":
+                    eingabe()
+                elif befehl2 == "entfernen":
+                    entfernen()
+                elif befehl2 == "#fertig":
+                    break
+        elif befehl == "abfrage":
             abfrage()
-        if befehl == "ausgabe":
+        elif befehl == "ausgabe":
             ausgabe()
+        elif befehl == "#fertig":
+            print("-----------------------------------------------------------------------------")
+            print("-----------------------------------------------------------------------------")
+            break
