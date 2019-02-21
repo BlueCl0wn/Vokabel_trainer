@@ -5,6 +5,13 @@ print(dictionarys)
 URI = dictionarys[input("Name of the dictionary you want to work with.")]
 eintraege = open(URI)
 
+#fgdf
+#ydfbgsdgs
+#sdfgsdfg
+#gfgasdg
+#sdfgsgsgfg
+#agadfg
+
 class Entry:
     def __init__(self, deutsch, englisch):
         self.deutsch = deutsch
