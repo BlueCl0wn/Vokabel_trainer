@@ -1,5 +1,7 @@
 import random
 
+version = 1.0
+
 # Class für die Dictionarys und Informationen über diese.
 class Dicts():
     def __init__(self, id, name, URI, sprache1, sprache2):
@@ -234,6 +236,7 @@ def abfrage():
 
 
 # Start anzeige des Programms.
+print("Version " + version)
 print("""Für eine erklärung des Programms siehe README.md
 -----------------------------------------------------------------------------
 -----------------------------------------------------------------------------""")
