@@ -98,19 +98,6 @@ def entfernen():#!!!!!!!!!!!!!!!!!!!!
 
 def abfrage():
     print(Liste)
-    # Vokabel1 = ""
-    # Vokabel2 = ""
-    # letzte = ""
-    # vorletzte = ""
-    # def while_letzte():
-    #     nonlocal Vokabel1, letzte, vorletzte
-    #     if (Vokabel1 == letzte or Vokabel1 == vorletzte):
-    #         while True:
-    #             position = random.randint(1, len(Liste) - 1)
-    #             Vokabel1 = Liste[position][0]
-    #             Vokabel2 = Liste[position][1]
-    #             if Vokabel1 != letzte and Vokabel1 != vorletzte:
-    #                 break
     while True:
         # Wie rum sollen die Vokabel abgefragt werden (Deutsch->Englisch, Englisch->Deutsch, Deutsch<->Englisch).
         abfrageart = input("Wie willst du abgefragt werden? Tippe für Deutsch -> Englisch = 1, für Englisch -> Deutsch = 2, für Deutsch <-> Englisch = 3. ")
