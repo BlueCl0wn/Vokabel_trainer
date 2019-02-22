@@ -234,12 +234,7 @@ def abfrage():
 
 
 # Start anzeige des Programms.
-print("""Mögliche Befehle sind:
-#fertig um ein Menu zurückzugehen
-#menu um in Hauptmenu zu gelangen
-eingabe um Vokabeln zum dictionary hinzuzufügen,
-abfrage um abgefragt zu werden,
-ausgabe um alle gespeicherten Vokabeln auszugeben
+print("""Für eine erklärung des Programms siehe README.md
 -----------------------------------------------------------------------------
 -----------------------------------------------------------------------------""")
 
