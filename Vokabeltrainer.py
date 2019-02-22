@@ -16,7 +16,7 @@ class Dicts():
 dictionarys = [Dicts(1, "Deutsch-Englisch", "Dictionarys/Deutsch-Englisch.txt", "Deutsch", "Englisch"),
                Dicts(2, "Deutsch-Latein", "Dictionarys/Deutsch-Latein.txt", "Deutsch", "Latein")]
 Liste = []
-################
+
 #-------------------------------------------------------------------------------
 # Funktionen für das Auswählen eines Dictionarys.
 def dictausgabe():
