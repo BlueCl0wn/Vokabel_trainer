@@ -40,16 +40,6 @@ def openURI(URI, mode):
 
 # def open_dict():#!!!!!!!!!!!!!!!!!!!
 
-# def while_letzte():
-#     global Vokabel1, letze, vorletzte
-#     if Vokabel1 == letze or Vokabel1 == vorletzte:
-#         while True:
-#             position = random.randint(1, len(Liste) - 1)
-#             Vokabel1 = Liste[position][0]
-#             Vokabel2 = Liste[position][1]
-#             if Vokabel1 != letzte and Vokabel1 != vorletzte:
-#                 break
-
 #-------------------------------------------------------------------------------
 # Funktionen für die verschiedenen Möglichkeiten im Menu.
 def bearbeiten():
@@ -223,7 +213,7 @@ def abfrage():
 
 
 # Start anzeige des Programms.
-print("Version " + version)
+print("Version " + str(version))
 print("""Für eine erklärung des Programms siehe README.md
 -----------------------------------------------------------------------------
 -----------------------------------------------------------------------------""")
