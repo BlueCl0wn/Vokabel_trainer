@@ -1,0 +1,11 @@
+*Deutsches Wort*:*Lateinisches Wort*
+lachen:ridere
+machen:facere
+gehen:ire
+schweigen:tacere
+wissen:scire
+Verbrecher:sceleratus
+Herr:dominus
+Herrin:domina
+Mann:vir
+Jungfrau:virgo

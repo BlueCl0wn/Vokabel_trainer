@@ -10,3 +10,4 @@ laufen:run
 Pferd:horse
 Box:box
 Lautsprecher:speaker
+Gruen:green
