@@ -74,17 +74,31 @@ def eingabe():
 def entfernen():#!!!!!!!!!!!!!!!!!!!!
     while True:
         f = open(URI(),"r")
-        lines = f.readlines()
-        print(lines)
+        line = f.read()
+        lines = line.split("\n")
         f.close()
+        line = str(lines)
+        print(line)
         zuentfernen = input(" Tippe den kompletten Namen der zu entfernenden Vokabel ein. ")
         if zuentfernen == "#fertig":
             break
+        else:
+            if zuentfernen in line:
+                line = line.replace(zuentfernen, "")
+                print("---------------")
+            else:
+                print("Diese Vokabel ist nicht verhanden.")
+                print("---------------")
+        del f, zuentfernen
+        line = line.replace("[", "")
+        line = line.replace("'", "")
+        line = line.replace("]", "")
+        line = line.replace(", ", "\n")
+        line = line.replace("\n\n", "\n")
         f = open(URI(), "w")
-        for line in lines:
-            if line != "zuentfernen"+ "\n":
-                f.write(line)
+        f.write(line)
         f.close()
+        del lines,f
 
 def abfrage():
     print(Liste)
