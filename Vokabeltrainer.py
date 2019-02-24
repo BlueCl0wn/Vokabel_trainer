@@ -24,25 +24,26 @@ def dictausgabe():
         print(dictionary.toDicts())
     print("-----------------------------------------------------------------------------")
 
-def URI():
+def URI() -> str:
     for i in range(len(dictionarys)):
         if Eingabe == dictionarys[i].id:
             return dictionarys[i].URI
 
-def openURI(URI, mode):
+def openURI(URI : str, mode : str):
     f = open(URI)
     file = f.read()
     raw_list = file.split("\n")
     raw_list.pop()
+    f.close()
     for string in raw_list:
         Liste.append(string.split(":"))
-    del(f, file, raw_list)
+    del f, file, raw_list
 
 # def open_dict():#!!!!!!!!!!!!!!!!!!!
 
 #-------------------------------------------------------------------------------
 # Funktionen für die verschiedenen Möglichkeiten im Menu.
-def bearbeiten():
+def bearbeiten(): # Öffnet das menu zum Auswählen ob man Vokebln hinzufügen oder entfernen möchte.
     while True:
         befehl2 = input("eingabe oder entfernen? ")
         if befehl2 == "eingabe":
@@ -51,14 +52,7 @@ def bearbeiten():
             entfernen()
         elif befehl2 == "#fertig":
             break
-
-def ausgabe():
-    print("-----------------------------------------------------------------------------")
-    for eintrag in range(len(Liste)):
-        print("".join(Liste[eintrag]))
-    print("-----------------------------------------------------------------------------")
-
-def eingabe():
+def eingabe(): # Menu in dem man Vokabeln zum ausgweählten Dictionary hinzufügen kann.
     while True:
         file = open(URI(), "a")
         deutsch = input("deutsches Wort: ")
@@ -69,9 +63,8 @@ def eingabe():
             break
         file.write(deutsch + ":" + englisch + "\n")
         file.close()
-        del(deutsch, englisch)
-
-def entfernen():#!!!!!!!!!!!!!!!!!!!!
+        del deutsch, englisch
+def entfernen(): # Menu in dem man Vokabeln aus dem ausgweählten Dictionary entfernen kann.
     while True:
         f = open(URI(),"r")
         line = f.read()
@@ -98,10 +91,24 @@ def entfernen():#!!!!!!!!!!!!!!!!!!!!
         f = open(URI(), "w")
         f.write(line)
         f.close()
-        del lines,f
+        del lines, f, line
+        print("-----------------------------------------------------------------------------")
 
-def abfrage():
-    print(Liste)
+def ausgabe(): # Gibt alle Vokaveln aus dem ausgwähltem Dictionary aus.
+    print("-----------------------------------------------------------------------------")
+    f = open(URI(),"r")
+    line = f.read()
+    lines = line.split("\n")
+    lines.pop()
+    f.close()
+    for eintrag in range(len(lines)):
+        Eintrag = lines[eintrag].split(":")
+        print("".join(Eintrag[0] + " - " + Eintrag[1]))
+    print("-----------------------------------------------------------------------------")
+    del line, lines
+
+def abfrage(): # Startet das Abfragend er Vokebeln.
+    openURI(URI(), "r")
     while True:
         # Wie rum sollen die Vokabel abgefragt werden (Deutsch->Englisch, Englisch->Deutsch, Deutsch<->Englisch).
         abfrageart = input("Wie willst du abgefragt werden? Tippe für Deutsch -> Englisch = 1, für Englisch -> Deutsch = 2, für Deutsch <-> Englisch = 3. ")
@@ -130,11 +137,9 @@ def abfrage():
                         position = random.randint(1, len(Liste) - 1)
                         Vokabel1 = Liste[position][0]
                         Vokabel2 = Liste[position][1]
-                        print(Vokabel1)
                         if Vokabel1 != letzte and Vokabel1 != vorletzte and Vokabel1 != vorvorletzte:
-                            print(Vokabel1)
                             break
-                uebersetzung = input("Englische Übersetzung von " + Vokabel1 + ": ")
+                uebersetzung = input("Übersetzung von " + Vokabel1 + ": ")
                 if uebersetzung == "#fertig":
                     print("-----------------------------------------------------------------------------")
                     break
@@ -146,7 +151,6 @@ def abfrage():
                 vorletzte = letzte
                 letzte = Vokabel1
                 del Vokabel1, Vokabel2
-
 
         # 2. Art des Abfragens der Vokabeln (Englisch->Deutsch).
         if abfrageint == 2:
@@ -166,7 +170,7 @@ def abfrage():
                         Vokabel2 = Liste[position][1]
                         if Vokabel1 != letzte and Vokabel1 != vorletzte and Vokabel1 != vorvorletzte:
                             break
-                uebersetzung = input("Englische Übersetzung von " + Vokabel2 + ": ")
+                uebersetzung = input("Übersetzung von " + Vokabel2 + ": ")
                 #
                 if uebersetzung == "#fertig":
                     print("-----------------------------------------------------------------------------")
@@ -179,7 +183,6 @@ def abfrage():
                 vorletzte = letzte
                 letzte = Vokabel1
                 del Vokabel1, Vokabel2
-
 
         # 3. Art des Abfragens der Vokabeln (Deutsch<->Englisch).
         if abfrageint == 3:
@@ -202,7 +205,7 @@ def abfrage():
                 # Es wird zufällig eine Abfragerichtung ausgwählt.
                 richtung = random.randint(0,1)
                 if richtung == 0:
-                    uebersetzung = input("Englische Übersetzung von " + Vokabel1 + ": ")
+                    uebersetzung = input("Übersetzung von " + Vokabel1 + ": ")
                     if uebersetzung == "#fertig":
                         print("-----------------------------------------------------------------------------")
                         break
@@ -211,7 +214,7 @@ def abfrage():
                     else:
                         print("Leider Falsch. Korrekt ist: "+ Vokabel2)
                 elif richtung == 1:
-                    uebersetzung = input("Englische Übersetzung von " + Vokabel2 + ": ")
+                    uebersetzung = input("Übersetzung von " + Vokabel2 + ": ")
                     if uebersetzung == "#fertig":
                         print("-----------------------------------------------------------------------------")
                         break
@@ -226,7 +229,7 @@ def abfrage():
 
 
 
-# Start anzeige des Programms.
+# Startanzeige des Programms.
 print("Version " + str(version))
 print("""Für eine erklärung des Programms siehe README.md
 -----------------------------------------------------------------------------
@@ -235,7 +238,6 @@ print("""Für eine erklärung des Programms siehe README.md
 while True:
     dictausgabe()
     Eingabe = int(input("welches dict? "))
-    openURI(URI(), "r")
     while True:
         befehl = input("Befehl: ")
         if befehl == "bearbeiten":
@@ -245,6 +247,7 @@ while True:
         elif befehl == "ausgabe":
             ausgabe()
         elif befehl == "#fertig":
+            Liste = [] # Liste muss gelöscht werden, weil sonst beim Auswählen des nächsten Dictionarys dieses an Liste angehängt werden würde.
             print("-----------------------------------------------------------------------------")
             print("-----------------------------------------------------------------------------")
             break
