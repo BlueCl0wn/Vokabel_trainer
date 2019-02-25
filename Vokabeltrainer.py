@@ -94,7 +94,7 @@ def entfernen(): # Menu in dem man Vokabeln aus dem ausgweählten Dictionary ent
         del lines, f, line
         print("-----------------------------------------------------------------------------")
 
-def ausgabe(): # Gibt alle Vokaveln aus dem ausgwähltem Dictionary aus.
+def ausgabe(): # Gibt alle Vokabeln aus dem ausgwähltem Dictionary aus.
     print("-----------------------------------------------------------------------------")
     f = open(URI(),"r")
     line = f.read()
@@ -107,10 +107,10 @@ def ausgabe(): # Gibt alle Vokaveln aus dem ausgwähltem Dictionary aus.
     print("-----------------------------------------------------------------------------")
     del line, lines
 
-def abfrage(): # Startet das Abfragend der Vokebeln.
+def abfrage(): # Startet das Abfragen der Vokebeln.
     openURI(URI(), "r")
     while True:
-        # Wie rum sollen die Vokabel abgefragt werden (Deutsch->Englisch, Englisch->Deutsch, Deutsch<->Englisch).
+        # Es wird abgefragt wie rum die Vokabel abgefragt werden sollen (Deutsch->Englisch, Englisch->Deutsch, Deutsch<->Englisch).
         abfrageart = input("Wie willst du abgefragt werden? Tippe für Deutsch -> Englisch = 1, für Englisch -> Deutsch = 2, für Deutsch <-> Englisch = 3. ")
         if abfrageart == "#fertig":
             print("-----------------------------------------------------------------------------")
@@ -131,7 +131,7 @@ def abfrage(): # Startet das Abfragend der Vokebeln.
                 position = random.randint(1, len(Liste) - 1)
                 Vokabel1 = Liste[position][0]
                 Vokabel2 = Liste[position][1]
-                # Es wird überprüft ob die gewählte Vokabel bei den letzetn 2 mal Abfragen schon vorkam und wenn ja wird die Vokabel geändert.
+                # Es wird überprüft ob die gewählte Vokabel bei den letzetn 2 mal Abfragen schon vorkam, wenn ja wird die Vokabel geändert.
                 if Vokabel1 == letzte or Vokabel1 == vorletzte or Vokabel1 == vorvorletzte:
                     while True:
                         position = random.randint(1, len(Liste) - 1)
@@ -139,6 +139,7 @@ def abfrage(): # Startet das Abfragend der Vokebeln.
                         Vokabel2 = Liste[position][1]
                         if Vokabel1 != letzte and Vokabel1 != vorletzte and Vokabel1 != vorvorletzte:
                             break
+                # Es wird die ausgewählte Vokabel ausgegeben und die Übersetzung soll eingetippt werden.
                 uebersetzung = input("Übersetzung von " + Vokabel1 + ": ")
                 if uebersetzung == "#fertig":
                     print("-----------------------------------------------------------------------------")
@@ -170,6 +171,7 @@ def abfrage(): # Startet das Abfragend der Vokebeln.
                         Vokabel2 = Liste[position][1]
                         if Vokabel1 != letzte and Vokabel1 != vorletzte and Vokabel1 != vorvorletzte:
                             break
+                # Es wird die ausgewählte Vokabel ausgegeben und die Übersetzung soll eingetippt werden.
                 uebersetzung = input("Übersetzung von " + Vokabel2 + ": ")
                 #
                 if uebersetzung == "#fertig":
@@ -205,6 +207,7 @@ def abfrage(): # Startet das Abfragend der Vokebeln.
                 # Es wird zufällig eine Abfragerichtung ausgwählt.
                 richtung = random.randint(0,1)
                 if richtung == 0:
+                    # Es wird die ausgewählte Vokabel ausgegeben und die Übersetzung soll eingetippt werden.
                     uebersetzung = input("Übersetzung von " + Vokabel1 + ": ")
                     if uebersetzung == "#fertig":
                         print("-----------------------------------------------------------------------------")
@@ -214,6 +217,7 @@ def abfrage(): # Startet das Abfragend der Vokebeln.
                     else:
                         print("Leider Falsch. Korrekt ist: "+ Vokabel2)
                 elif richtung == 1:
+                    # Es wird die ausgewählte Vokabel ausgegeben und die Übersetzung soll eingetippt werden.
                     uebersetzung = input("Übersetzung von " + Vokabel2 + ": ")
                     if uebersetzung == "#fertig":
                         print("-----------------------------------------------------------------------------")
