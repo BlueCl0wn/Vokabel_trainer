@@ -107,7 +107,7 @@ def ausgabe(): # Gibt alle Vokaveln aus dem ausgwähltem Dictionary aus.
     print("-----------------------------------------------------------------------------")
     del line, lines
 
-def abfrage(): # Startet das Abfragend er Vokebeln.
+def abfrage(): # Startet das Abfragend der Vokebeln.
     openURI(URI(), "r")
     while True:
         # Wie rum sollen die Vokabel abgefragt werden (Deutsch->Englisch, Englisch->Deutsch, Deutsch<->Englisch).
